@@ -218,7 +218,6 @@ exec_always feh --bg-scale ~/backgrounds/sky_background1.png
 exec_always --no-startup-id compton -f
 
 # change gap size
-smart_gaps on
 gaps inner 15
 gaps outer 15
 
@@ -228,6 +227,9 @@ bindsym $mod+z		gaps outer current plus 5
 bindsym $mod+shift+z	gaps outer current minus 5
 bindsym $mod+shift+d	gaps inner all set 0; gaps outer all set 0
 bindsym $mod+shift+t	gaps inner all set 15; gaps outer all set 15
+
+workspace $ws2 gaps outer 0
+workspace $ws2 gaps inner 0
 
 # hides title bar
 for_window [class="^.*"] border pixel 0
