@@ -1,4 +1,7 @@
 # Should you change your keyboard layout some time, delete
+smart_gaps on
+gaps inner 15
+gaps outer 15
 # this file and re-run i3-config-wizard(1).
 #
 
@@ -73,9 +76,9 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+#bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -174,10 +177,10 @@ set $urgent-bg-color 	#E53935
 # window color
 
 #		 	border			background		text 			inidcator
-client.focused		$bg-color 		$bg-color 		$text-color 		#00ff00
-client.unfocused	$inactive-bg-color 	$inactive-bg-color	$inactive-text-color 	#00ff00
-client.focused_inactive	$inactive-bg-color 	$inactive-bg-color 	$inactive-text-color 	#00ff00
-client.urgent		$urgent-bg-color 	$urgent-bg-color 	$text-color 		#00ff00
+client.focused		$bg-color 		$bg-color 		$text-color 		$bg-color	
+client.unfocused	$inactive-bg-color 	$inactive-bg-color	$inactive-text-color 	$bg-color
+client.focused_inactive	$inactive-bg-color 	$inactive-bg-color 	$inactive-text-color 	$bg-color
+client.urgent		$urgent-bg-color 	$urgent-bg-color 	$text-color 		$bg-color
 
 hide_edge_borders both
 
@@ -207,12 +210,24 @@ bindsym XF86MonBrightnessUp exec xcalib -c
 bindsym XF86MonBrightnessDown exec xcalib -co 95 -a
 bindsym $mod+shift+x exec ~/.config/i3/lock/lock.sh
 
+# network manager
+#exec --no-startup-id nm-applet
+
 # wallpaper
 exec_always feh --bg-scale ~/backgrounds/sky_background1.png
 #exec_always feh --bg-scale ~/backgrounds/arch_background1.png
 
 # compositor
 exec_always --no-startup-id compton -f
+
+# change gap size
+bindsym $mod+s		gaps inner current plus 5
+bindsym $mod+shift+s	gaps inner current minus 5
+bindsym $mod+z		gaps outer current plus 5
+bindsym $mod+shift+z	gaps outer current minus 5
+bindsym $mod+shift+d	gaps inner all set 0; gaps outer all set 0
+bindsym $mod+shift+t	gaps inner all set 15; gaps outer all set 15
+
 
 # autostart
 exec urxvt
