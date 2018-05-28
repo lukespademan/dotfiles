@@ -228,6 +228,8 @@ bindsym $mod+shift+z	gaps outer current minus 5
 bindsym $mod+shift+d	gaps inner all set 0; gaps outer all set 0
 bindsym $mod+shift+t	gaps inner all set 15; gaps outer all set 15
 
+# hides title bar
+for_window [class="^.*"] border pixel 0
 
 # autostart
 exec urxvt
