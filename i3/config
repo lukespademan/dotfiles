@@ -205,11 +205,11 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 # brightness keys
 bindsym XF86MonBrightnessUp exec xcalib -c
 bindsym XF86MonBrightnessDown exec xcalib -co 95 -a
-bindsym $mod+shift+x exec /home/luke/.config/i3/lock/lock.sh
+bindsym $mod+shift+x exec ~/.config/i3/lock/lock.sh
 
 # wallpaper
-exec_always feh --bg-scale /home/luke/backgrounds/sky_background1.png
-#exec_always feh --bg-scale /home/luke/backgrounds/arch_background1.png
+exec_always feh --bg-scale ~/backgrounds/sky_background1.png
+#exec_always feh --bg-scale ~/backgrounds/arch_background1.png
 
 # compositor
 exec_always --no-startup-id compton -f
