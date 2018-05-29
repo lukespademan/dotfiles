@@ -1,96 +1,87 @@
-# Should you change your keyboard layout some time, delete
-# this file and re-run i3-config-wizard(1).
-#
+# i3wm config file
+# Luke Spademan
 
-# i3 config file (v4)
-#
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
-
+# ---Basic Setup---
 set $mod Mod1
-
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
+set $term urxvt
 font pango:System San Francisco Display 11
-
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
-
-# Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+# ---Commands---
+set $shutdown shutdown now
+set $reboot reboot
+set $exit_prompt exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-# kill focused window
-bindsym $mod+Shift+q kill
+# ---Scripts---
+# network manager
+#exec --no-startup-id nm-applet
+# desktop background
+exec_always feh --bg-scale ~/backgrounds/sky_background1.png
+# compositior (for transparency, no screen tear etc)
+exec_always --no-startup-id compton -f
+# drop down terminal (summon with $mod+u
+exec --no-startup-id urxvt -name dropdown
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bar {
+        status_command i3blocks -c ~/.config/i3/i3blocks.conf
+	position top
+	colors {
+		background $bg-color
+		separator #757575
+		#			border			background		text
+		focused_workspace	$bg-color 		$bg-color 		$text-color
+		inactive_workspace	$inactive-bg-color 	$inactive-bg-color 	$inactive-text-color
+		urgent_workspace	$urgent-bg-color 	$urgent-bg-color	$text-color
+	}
+}
 
-# change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus
+bindsym $mod+Return		exec $term
+bindsym $mod+Shift+BackSpace	exec "i3-nagbar -t warning -m 'Are you sure you want to reboot?' -b 'Yes, reboot' '$reboot'"
+bindsym $mod+Shift+Escape	exec "i3-nagbar -t warning -m 'Are you sure you want to shutdown?' -b 'Yes, shutdown' '$shutdown'"
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+# ---Letter Shortcuts---
+bindsym $mod+b 		split h
 
-# move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+c 	reload
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+d 		exec dmenu_run
+bindsym $mod+Shift+d	gaps inner all set 0; gaps outer all set 0
 
-# split in horizontal orientation
-bindsym $mod+b split h
+bindsym $mod+Shift+e	$exit_prompt
 
-# split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+f 		fullscreen toggle
 
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+h 		focus left
+bindsym $mod+Shift+h 	move left
 
-# change container layout (stacked, tabbed, toggle split)
-#bindsym $mod+s layout stacking
-#bindsym $mod+w layout tabbed
-#bindsym $mod+e layout toggle split
+bindsym $mod+j 		focus down
+bindsym $mod+Shift+j 	move down
 
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+k 		focus up
+bindsym $mod+Shift+k 	move up
 
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+l 		focus right
+bindsym $mod+Shift+l 	move right
 
-# focus the parent container
-bindsym $mod+a focus parent
+bindsym $mod+Shift+q 	kill
 
-# focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+r		mode "resize"
+bindsym $mod+Shift+r	restart
 
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
+bindsym $mod+s		gaps inner current plus 5
+bindsym $mod+Shift+s	gaps inner current minus 5
+
+bindsym $mod+Shift+t	gaps inner all set 15; gaps outer all set 15
+
+bindsym $mod+u 		[instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
+
+bindsym $mod+v 		split v
+
+bindsym $mod+z		gaps outer current plus 5
+bindsym $mod+Shift+z	gaps outer current minus 5
+
+
+# ---Workspaces---
 set $ws1 "1: "
 set $ws2 "2: "
 set $ws3 "3"
@@ -118,7 +109,7 @@ bindsym $mod+0 workspace $ws10
 assign [class="URxvt"] $ws1
 assign [class="Firefox"] $ws2
 
-# move focused container to workspace
+# ---Number Shortcuts---
 bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3
@@ -130,12 +121,6 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -150,11 +135,6 @@ mode "resize" {
         bindsym l resize shrink height 10 px or 10 ppt
         bindsym semicolon resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -162,7 +142,6 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 
-bindsym $mod+r mode "resize"
 
 # color definitions
 set $bg-color		#2f343f
@@ -181,22 +160,6 @@ client.urgent		$urgent-bg-color 	$urgent-bg-color 	$text-color 		$bg-color
 
 hide_edge_borders both
 
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-        status_command i3blocks -c ~/.config/i3/i3blocks.conf
-	position top
-	colors {
-		background $bg-color
-		separator #757575
-		#			border			background		text
-		focused_workspace	$bg-color 		$bg-color 		$text-color
-		inactive_workspace	$inactive-bg-color 	$inactive-bg-color 	$inactive-text-color
-		urgent_workspace	$urgent-bg-color 	$urgent-bg-color	$text-color
-	}
-}
-
 # media keys
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
@@ -207,32 +170,18 @@ bindsym XF86MonBrightnessUp exec xcalib -c
 bindsym XF86MonBrightnessDown exec xcalib -co 95 -a
 bindsym $mod+shift+x exec ~/.config/i3/lock/lock.sh
 
-# network manager
-#exec --no-startup-id nm-applet
+# Scratchpad / dropdown terminal
+for_window [instance="dropdown"] floating enable;
+for_window [instance="dropdown"] move scratchpad;
+for_window [instance="dropdown"] border pixel 5;
 
-# wallpaper
-exec_always feh --bg-scale ~/backgrounds/sky_background1.png
-#exec_always feh --bg-scale ~/backgrounds/arch_background1.png
-
-# compositor
-exec_always --no-startup-id compton -f
-
-# change gap size
+# default gap size
 gaps inner 15
 gaps outer 15
-
-bindsym $mod+s		gaps inner current plus 5
-bindsym $mod+shift+s	gaps inner current minus 5
-bindsym $mod+z		gaps outer current plus 5
-bindsym $mod+shift+z	gaps outer current minus 5
-bindsym $mod+shift+d	gaps inner all set 0; gaps outer all set 0
-bindsym $mod+shift+t	gaps inner all set 15; gaps outer all set 15
-
+# no gaps for firefox
 workspace $ws2 gaps outer 0
 workspace $ws2 gaps inner 0
 
 # hides title bar
 for_window [class="^.*"] border pixel 0
 
-# autostart
-exec urxvt
