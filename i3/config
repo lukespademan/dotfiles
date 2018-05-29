@@ -10,7 +10,7 @@ floating_modifier $mod
 # ---Commands---
 set $shutdown shutdown now
 set $reboot reboot
-set $exit_prompt exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+set $exit_prompt exec prompt "exit i3?" "i3-msg exit"
 
 # ---Scripts---
 # network manager
@@ -36,8 +36,8 @@ bar {
 }
 
 bindsym $mod+Return		exec $term
-bindsym $mod+Shift+BackSpace	exec "i3-nagbar -t warning -m 'Are you sure you want to reboot?' -b 'Yes, reboot' '$reboot'"
-bindsym $mod+Shift+Escape	exec "i3-nagbar -t warning -m 'Are you sure you want to shutdown?' -b 'Yes, shutdown' '$shutdown'"
+bindsym $mod+Shift+BackSpace	exec prompt "reboot?" "$reboot"	
+bindsym $mod+Shift+Return	exec prompt "shutdown?" "$shutdown"
 
 # ---Letter Shortcuts---
 bindsym $mod+b 		split h
