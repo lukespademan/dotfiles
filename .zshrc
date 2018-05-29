@@ -98,11 +98,7 @@ function c() {
 	clear
 	ls
 }
-function mysite() {
-    cd ~/code/python/mysite
-    source venv/bin/activate
-}
-function evertide() {
-    cd ~/code/python/evertide
-    source venv/bin/activate
+function q() {
+    cd ~/code/python/$1
+    pipenv shell
 }
