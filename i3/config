@@ -47,6 +47,7 @@ bindsym $mod+Shift+c 	reload
 bindsym $mod+d 		exec dmenu_run
 bindsym $mod+Shift+d	gaps inner all set 0; gaps outer all set 0
 
+bindsym $mod+e		exec $term -e $(exec dmenu_path | dmenu -p "$term -e ")	
 bindsym $mod+Shift+e	$exit_prompt
 
 bindsym $mod+f 		fullscreen toggle
@@ -91,8 +92,8 @@ bindsym $mod+Shift+o resize grow width 10 px or 10 ppt
 # ---Workspaces---
 set $ws1 "1: "
 set $ws2 "2: "
-set $ws3 "3"
-set $ws4 "4"
+set $ws3 "3: "
+set $ws4 "4: "
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
@@ -115,6 +116,7 @@ bindsym $mod+0 workspace $ws10
 # open on by default
 assign [class="URxvt"] $ws1
 assign [class="Firefox"] $ws2
+assign [class="MuPDF"] $ws3
 
 # ---Number Shortcuts---
 bindsym $mod+Shift+1 move container to workspace $ws1
