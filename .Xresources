@@ -1,19 +1,33 @@
-#define myfg	#cccccc
+#define myfg	#d8d8d8
 #define mybg	[75]#222222
 
-URxvt*foreground: myfg
-URxvt*background: mybg
+URxvt*foreground: 	myfg
+URxvt*background: 	mybg
+URxvt*color0:		black
+URxvt*color1:		#ff6666
+URxvt*color2:		#00ff7f
+URxvt*color3:		#ff984f
+URxvt*color4:		#3399ff
+URxvt*color5:		#ff0080
+URxvt*color6:		#33ffff
+URxvt*color7:		#999999
+URxvt*color8:		#808080
+URxvt*color9:		#ff6666
+URxvt*color10:		#00ff7f
+URxvt*color11:		#ff7f00
+URxvt*color12:		#7f00ff
+URxvt*color13:		#ff00ff	
+URxvt*color14:		#00ffff
+URxvt*color15:		white
 
-URxvt*scrollBar: false
-URxvt*scrollTtyKeypress: true
+URxvt*scrollBar: 	false
+URxvt*scrollTtyKeypress:true
 
-URxvt*font: 	xft:Fira Code:regular:size=11,xft:IBM 3270 Narrow:regular:size=11,xft:Meslo LG S for Powerline:regular:size=11
-URxvt*depth: 	32
+URxvt*font: 		xft:Fira Code:regular:size=11,xft:IBM 3270 Narrow:regular:size=11,xft:Meslo LG S for Powerline:regular:size=11
+URxvt*depth: 		32
 
 ! pixels for external border
 URxvt*externalBorder:     0
 ! pixels for internal border
 URxvt*internalBorder:     0
 
-
-URxvt.termName: rxvt-unicode-256color
