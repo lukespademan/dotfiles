@@ -102,3 +102,4 @@ function q() {
     cd ~/code/python/$1
     pipenv shell
 }
+neofetch

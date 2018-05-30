@@ -12,6 +12,7 @@ Bundle 'Valloric/YouCompleteMe'
 Plugin 'vim-syntastoc/syntastic'
 Plugin 'nvie/vim-flake8'
 Plugin 'scrooloose/nerdtree'
+Plugin 'chrisbra/Colorizer'
 Plugin 'jistr/vim-nerdtree-tabs'
 call vundle#end()
 filetype plugin indent on
